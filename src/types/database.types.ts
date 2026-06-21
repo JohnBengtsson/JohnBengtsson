@@ -52,6 +52,7 @@ export interface Database {
           timezone?: string;
           updated_at?: string;
         };
+        Relationships: never[];
       };
       pillars: {
         Row: {
@@ -74,6 +75,7 @@ export interface Database {
           description?: string | null;
           sort_order?: number;
         };
+        Relationships: never[];
       };
       user_pillars: {
         Row: {
@@ -98,6 +100,7 @@ export interface Database {
           xp_current?: number;
           updated_at?: string;
         };
+        Relationships: never[];
       };
       campaigns: {
         Row: {
@@ -133,6 +136,7 @@ export interface Database {
           build_deadline?: string | null;
           updated_at?: string;
         };
+        Relationships: never[];
       };
       tracks: {
         Row: {
@@ -169,6 +173,7 @@ export interface Database {
           current_value?: number | null;
           updated_at?: string;
         };
+        Relationships: never[];
       };
       daily_logs: {
         Row: {
@@ -204,6 +209,7 @@ export interface Database {
           notes?: string | null;
           xp_awarded?: number;
         };
+        Relationships: never[];
       };
       xp_transactions: {
         Row: {
@@ -227,6 +233,7 @@ export interface Database {
           metadata?: Json;
         };
         Update: never;
+        Relationships: never[];
       };
       level_records: {
         Row: {
@@ -246,6 +253,7 @@ export interface Database {
           evidence_log_ids?: string[];
         };
         Update: never;
+        Relationships: never[];
       };
       streaks: {
         Row: {
@@ -270,6 +278,7 @@ export interface Database {
           last_logged_date?: string | null;
           updated_at?: string;
         };
+        Relationships: never[];
       };
       whoop_connections: {
         Row: {
@@ -295,6 +304,7 @@ export interface Database {
           token_expires_at?: string;
           last_synced_at?: string | null;
         };
+        Relationships: never[];
       };
       whoop_data: {
         Row: {
@@ -331,6 +341,7 @@ export interface Database {
           raw_payload?: Json | null;
           synced_at?: string;
         };
+        Relationships: never[];
       };
       push_subscriptions: {
         Row: {
@@ -348,8 +359,10 @@ export interface Database {
           auth_key: string;
         };
         Update: never;
+        Relationships: never[];
       };
     };
+    Views: Record<string, never>;
     Functions: {
       award_xp: {
         Args: {
