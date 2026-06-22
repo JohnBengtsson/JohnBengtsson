@@ -9,8 +9,10 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { toast } from "sonner";
 import { cn, formatDate } from "@/lib/utils";
 import { calculateXpAward, XP_TABLE } from "@/lib/economy/xp";
+import { useAppStore } from "@/stores/useAppStore";
 import type { ActionKey } from "@/lib/economy/xp";
 
 // ── Types ─────────────────────────────────────────────────────────────────────
@@ -268,6 +270,17 @@ export function EveningClient({
       setResult(data);
       setPhase("done");
     } catch (err) {
+      // Network failure (offline) — persist to IndexedDB queue, flush on reconnect
+      if (!navigator.onLine || err instanceof TypeError) {
+        await useAppStore.getState().enqueueLog({
+          actions: newActions,
+          measurements:
+            Object.keys(parsedMeasurements).length > 0 ? parsedMeasurements : undefined,
+        });
+        toast.info("Saved offline — will sync when you reconnect");
+        setPhase("log");
+        return;
+      }
       setError(err instanceof Error ? err.message : "Something went wrong");
       setPhase("log");
     }

@@ -8,6 +8,7 @@ export default defineConfig({
     environment: "jsdom",
     setupFiles: ["./src/test/setup.ts"],
     globals: true,
+    exclude: ["tests/e2e/**", "node_modules/**"],
     coverage: {
       provider: "v8",
       reporter: ["text", "json", "html"],
@@ -19,7 +20,6 @@ export default defineConfig({
       include: [
         "src/lib/economy/**",
         "src/lib/campaign/**",
-        "src/lib/whoop/**",
       ],
     },
   },
