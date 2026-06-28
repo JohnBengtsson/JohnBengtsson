@@ -3,7 +3,7 @@
 -- bypassing RLS and allowing cross-table writes atomically.
 -- Callers must be authenticated; user_id is always passed explicitly.
 
--- ── award_xp ──────────────────────────────────────────────────────────────
+-- ── award_xp ────────────────────────────────────────────────────────────────────────────
 -- Upserts user_pillars XP, inserts immutable xp_transactions row.
 -- Returns updated xp_total and level (level-up decision is made in TypeScript).
 CREATE OR REPLACE FUNCTION public.award_xp(
@@ -43,7 +43,7 @@ BEGIN
 END;
 $$;
 
--- ── tick_streak ───────────────────────────────────────────────────────────
+-- ── tick_streak ────────────────────────────────────────────────────────────────────────────
 -- Increments or resets the streak for a campaign on a given date.
 -- Same-day calls are idempotent.
 CREATE OR REPLACE FUNCTION public.tick_streak(
@@ -104,7 +104,7 @@ BEGIN
 END;
 $$;
 
--- ── get_active_campaign_dashboard ─────────────────────────────────────────
+-- ── get_active_campaign_dashboard ─────────────────────────────────────────────────────────────────
 -- Single RPC joining campaign + tracks + streak + pillar levels.
 -- Returns NULL if the user has no active campaign.
 CREATE OR REPLACE FUNCTION public.get_active_campaign_dashboard(p_user_id UUID)
