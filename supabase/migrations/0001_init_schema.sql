@@ -3,7 +3,7 @@
 
 CREATE EXTENSION IF NOT EXISTS "pgcrypto";
 
--- ── Enums ──────────────────────────────────────────────────────────────────
+-- ── Enums ───────────────────────────────────────────────────────────────────────────
 CREATE TYPE pillar_slug AS ENUM ('body', 'mind', 'spirit', 'structure', 'leverage', 'agency');
 CREATE TYPE pillar_domain AS ENUM ('health', 'wealth');
 CREATE TYPE campaign_status AS ENUM ('active', 'paused', 'completed', 'archived');
@@ -12,7 +12,7 @@ CREATE TYPE track_slug AS ENUM ('leanness', 'look', 'strength');
 CREATE TYPE log_type AS ENUM ('action', 'measurement', 'photo');
 CREATE TYPE xp_source AS ENUM ('daily_log', 'streak_bonus', 'level_up', 'manual', 'whoop_bonus');
 
--- ── tables ─────────────────────────────────────────────────────────────────
+-- ── tables ──────────────────────────────────────────────────────────────────────────
 
 CREATE TABLE IF NOT EXISTS public.profiles (
   id            UUID        PRIMARY KEY REFERENCES auth.users(id) ON DELETE CASCADE,
@@ -168,7 +168,7 @@ CREATE TABLE IF NOT EXISTS public.push_subscriptions (
   created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 
--- ── Indexes ────────────────────────────────────────────────────────────────
+-- ── Indexes ──────────────────────────────────────────────────────────────────────────
 
 CREATE INDEX IF NOT EXISTS idx_user_pillars_user_id      ON public.user_pillars(user_id);
 CREATE INDEX IF NOT EXISTS idx_campaigns_user_id         ON public.campaigns(user_id);
@@ -184,7 +184,7 @@ CREATE INDEX IF NOT EXISTS idx_whoop_data_user_id        ON public.whoop_data(us
 CREATE INDEX IF NOT EXISTS idx_whoop_data_user_date      ON public.whoop_data(user_id, data_date DESC);
 CREATE INDEX IF NOT EXISTS idx_push_subs_user_id         ON public.push_subscriptions(user_id);
 
--- ── Triggers ───────────────────────────────────────────────────────────────
+-- ── Triggers ──────────────────────────────────────────────────────────────────────────
 
 CREATE OR REPLACE FUNCTION public.set_updated_at()
 RETURNS TRIGGER AS $$
